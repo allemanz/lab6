@@ -1,0 +1,9 @@
+isEmpty functions fine.
+enqueue is placing values at the front of the queue, not the back.
+dequeue funtions fine.
+peekFront functions fine.
+Destructor doesn't delete any nodes, pointer simply loses the front node.
+
+So, test 4-9 show that enqueuing values puts them at the front (wrong) and dequeue removes the front (right). Alternatively the peekFront and dequeue could both be affecting the back, but it seems unlikely that those two functions would be wrong rather than just the one enqueue function. 
+
+Also memory leak test when deleting queue of more than one value returns that 16 blocks are definitely lost and more blocks are indirectly lost proportional to how many values were enqueued. This makes me certain that the front pointer simply loses track of the front, allowing the rest of the nodes to also be lost indirectly.
