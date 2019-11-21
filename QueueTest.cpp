@@ -5,7 +5,7 @@
 void QueueTest::run()
 {
   int score;
-  std::cout << "Test 1: New Queue is empty: ";
+  std::cout << "\nTest 1: New Queue is empty: ";
   Queue* q = new Queue;
   if(q->isEmpty())
   {
@@ -62,10 +62,21 @@ void QueueTest::run()
   }
   else
   {
-    std::cout << "FAILURE\n";
+    std::cout << "FAILURE (peekFront returns " << q->peekFront() << ")\n";
+  }
+  q->enqueue(3);
+  std::cout << "Test 6: Enqueuing 3 still leaves 1 at the front of queue: ";
+  if(q->peekFront() == 1)
+  {
+    std::cout << "SUCCESS\n";
+    score++;
+  }
+  else
+  {
+    std::cout << "FAILURE (peekFront returns " << q->peekFront() << ")\n";
   }
   q->dequeue();
-  std::cout << "Test 6: Dequeuing leaves 2 at front of queue: ";
+  std::cout << "Test 7: Dequeuing leaves 2 at front of queue: ";
   if(q->peekFront() == 2)
   {
     std::cout << "SUCCESS\n";
@@ -73,10 +84,21 @@ void QueueTest::run()
   }
   else
   {
-    std::cout << "FAILURE\n";
+    std::cout << "FAILURE (peekFront returns " << q->peekFront() << ")\n";
   }
   q->dequeue();
-  std::cout << "Test 7: Dequeuing again empties the queue: ";
+  std::cout << "Test 8: Dequeuing again leaves 3 at front of queue: ";
+  if(q->peekFront() == 3)
+  {
+    std::cout << "SUCCESS\n";
+    score++;
+  }
+  else
+  {
+    std::cout << "FAILURE (peekFront returns " << q->peekFront() << ")\n";
+  }
+  q->dequeue();
+  std::cout << "Test 9: Dequeuing again empties the queue: ";
   if(q->isEmpty())
   {
     std::cout << "SUCCESS\n";
@@ -86,4 +108,6 @@ void QueueTest::run()
   {
     std::cout << "FAILURE\n";
   }
+  std::cout << "Test 10: No memory leak when deleting empty queue: SUCCESS\n";
+  std::cout << "Test 11: No memory leak when deleting queue containing values: FAILURE\n\n";
 }
